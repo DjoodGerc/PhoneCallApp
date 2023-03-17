@@ -11,7 +11,6 @@ import java.util.List;
 @Component //прочитвй
 public class DataAccessObject {
 
-//    private static final List<CallModel> calls=new ArrayList<>();
     public static final String URL ="jdbc:postgresql://localhost:5432/AppDataBase";
     public static final String user="postgres";
     public static final String password="2709";

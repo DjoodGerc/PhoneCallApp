@@ -24,7 +24,7 @@ public class Controller {
     @GetMapping(value = "/Calls")
     public ResponseEntity<List<CallModel>> read() {
         final List<CallModel> calls = DataAccessObject.getAllFields();
-        if (calls.isEmpty() && calls != null) {
+        if (calls.isEmpty() ) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(calls, HttpStatus.OK);
