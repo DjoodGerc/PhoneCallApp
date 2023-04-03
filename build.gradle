@@ -2,24 +2,44 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.4'
 	id 'io.spring.dependency-management' version '1.1.0'
+	id "io.freefair.lombok" version "8.0.1"
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '19'
+//sourceCompatibility = '19'
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.amqp:spring-rabbit:3.0.2'
+	implementation 'org.projectlombok:lombok:1.18.26'
+	implementation 'org.liquibase:liquibase-core:4.20.0'
+	testImplementation 'com.h2database:h2:2.1.214'
+	testImplementation 'junit:junit:4.13.2'
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+	implementation 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+	testAnnotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+	compileOnly 'org.projectlombok:lombok:1.18.26'
+	annotationProcessor 'org.projectlombok:lombok:1.18.26'
+	testCompileOnly 'org.projectlombok:lombok:1.18.26'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.springframework.data:spring-data-envers:3.0.3'
+	implementation 'org.springframework.data:spring-data-jpa:3.0.3'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 }
 
 tasks.named('test') {

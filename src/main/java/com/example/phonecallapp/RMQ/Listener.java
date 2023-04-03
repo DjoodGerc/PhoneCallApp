@@ -1,45 +1,37 @@
 package com.example.phonecallapp.RMQ;
 
-import com.example.phonecallapp.dataacces.DataAccessObject;
-import com.example.phonecallapp.model.CallModel;
-import com.fasterxml.jackson.core.JsonProcessingException;
+
+import com.example.phonecallapp.mappers.DAOMapper;
+import com.example.phonecallapp.repository.CallDAO;
+import com.example.phonecallapp.repository.CallDTO;
+import com.example.phonecallapp.repository.CallRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.Consumer;
+import com.rabbitmq.client.DefaultConsumer;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.Payload;
+
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 
 @Component
 @EnableRabbit
 public class Listener {
-
-    private ConnectionFactory factory =new ConnectionFactory();
-        private Connection conn;
-
-    {
-        try {
-            conn = factory.newConnection();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (TimeoutException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    @Autowired
+    private CallRepo data;
+    @Autowired
+    private DAOMapper daoMapper;
     @RabbitListener(queues = "AppQueue")
-    public void listener(String jsonString){
-        ObjectMapper mapper = new ObjectMapper();
-        CallModel call;
-        try {
-            call = mapper.readValue(jsonString, CallModel.class);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+    public void listener(@Payload CallDAO callDAO) throws IOException {
+        data.save(daoMapper.toDTO(callDAO));
 
-        DataAccessObject.setField(call);
+
     }
 }
