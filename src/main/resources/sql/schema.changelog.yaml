@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table.calls_info
+      author: Pavel
+      failOnError: true
+      validCheckSum: ANY
+      changes:
+        - sqlFile: { dbms: 'postgresql,h2', path: sql/updates/create-table.calls_info.sql }
+  - changeSet:
+      id: add-table.shedlock
+      author: Pavel
+      failOnError: true
+      validCheckSum: ANY
+      changes:
+        - sqlFile: { dbms: 'postgresql,h2', path: sql/updates/add-table.shedlock.sql }
+  - changeSet:
+      id: update-table-add-check.calls_info
+      author: Pavel
+      failOnError: true
+      validCheckSum: ANY
+      changes:
+        - sqlFile: { dbms: 'postgresql,h2', path: sql/updates/update-table-add-check.calls_info.sql }
+  - changeSet:
+      id: timestamp-to-timestamp-with-time-zone.calls_info
+      author: Pavel
+      failOnError: true
+      validCheckSum: ANY
+      changes:
+        - sqlFile: { dbms: 'postgresql,h2', path: sql/updates/timestamp-to-timestamp-with-time-zone.calls_info.sql }

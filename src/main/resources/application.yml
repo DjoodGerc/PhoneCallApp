@@ -1,0 +1,56 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: "jdbc:postgresql://localhost:5432/AppDataBase"
+    username: postgres
+    password: 2709
+
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+        - "5672:5672"
+    template:
+      exchange: fraud_massage_exchange
+      routing-key: routing_key
+  liquibase:
+    enabled: true
+    change-log: sql/schema.changelog.yaml
+    default-schema: public
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+
+config:
+  country-codes:
+    -
+      name: Russia
+      code: 7
+      operators: [123,777,916]
+      fraud-numbers: [6666666666, 7777777777,1234567890]
+    -
+      name: US
+      code: 4
+      operators: []
+      fraud-numbers: []
+    -
+      name: Zimbabwe
+      code: 263
+      operators: []
+      fraud-numbers: []
+    - name: Germany
+      code: 49
+      operators: []
+      fraud-numbers: []
+    - name:  Switzerland
+      code: 41
+      operators: []
+      fraud-numbers: []
+
+
+
+

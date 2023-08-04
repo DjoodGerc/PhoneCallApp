@@ -7,14 +7,15 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-//sourceCompatibility = '19'
+
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+	implementation 'org.springframework.boot:spring-boot-starter-webflux:3.0.6'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -40,6 +41,19 @@ dependencies {
 	implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+	implementation 'net.javacrumbs.shedlock:shedlock-spring:5.0.0'
+	implementation 'net.javacrumbs.shedlock:shedlock-provider-jdbc-template:5.0.0'
+	implementation 'org.springframework.boot:spring-boot-configuration-processor:3.0.5'
+
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2'
+	implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+	testImplementation 'com.squareup.okhttp3:mockwebserver:4.11.0'
+
+
+
+
+
+
 }
 
 tasks.named('test') {

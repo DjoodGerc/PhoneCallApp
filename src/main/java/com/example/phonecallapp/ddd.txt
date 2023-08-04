@@ -1,0 +1,60 @@
+добавить поля is spam, is roaming, roaming_country, is fraud
+1)if:
+У звонящего пять и более вызовов на РАЗНЫЕ номера в течении последних 10 минут.
+true/false
+
+2)if:
+Если у принимающего звонок номер телефона по коду страны принадлежит не России, то проставляем ис роуминг тру и заполняем страну.
+Конфигурация код-страна находится в конфиге сервиса.
+*** (111)111 11-11
+^
+|
+код страны
+
+достать конфигурацию из app.yml
+
+roaming из called
+
+3)
+    1) Номер входит в список недобросовестных - это список в конфиге сервиса.
+    2) Если номер звонящего россия но код (три цифры не подходят ни одному оператору). Конфиг оператор -код в конфиге сервиса.
+
+If
+true fraud условие, то записываю в новую очередь в раббите (routing key, exchange
+
++
+schedlock
+
+
+тесты DTO-> DAO
+LIQUIEBASE
+long в dao
+
+парсинг номера в create + проверка
+классы в конфиге
+
+swagger контракт
+open source в open api готовые решения
+
+проверка на ошибку webclient
+обертка для вызова client
+- тесты на client mock web client
+- mockmvc для тестов
+- mock web server для интеграции
+- тесты на body и uri
+localdatetime->offsetdatetime
+2023-04-28T11:34:49.730183+03:00
+посмотри onStatus:error в webclient
+
+
+//unique number fraudnumers db;
+find by number listener fraudnumbers
+
+
+spring security
+
+авторизация на второй сервис
+
+
+
+spring data hibernate и jdbc как связаны читать

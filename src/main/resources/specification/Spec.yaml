@@ -1,0 +1,140 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: Phone Call app
+  description: application for handling information about calls
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/AVRAMENKOPAV/PhoneCall/1.0.0
+  - url: https://localhost:8080/
+
+paths:
+  /saveCall:
+    post:
+      summary: saves call sended as json
+      description: saves call sended as json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallDao'
+        required:
+          true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallDao'
+        '400':
+          description: wrong json format
+  /Calls:
+    get:
+      summary: get all calls
+      description: get all calls from db
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CallDao'
+        '400':
+          description: db is empty
+  /Calls/{id}:
+    get:
+      summary: get call by id
+      description: get call by id from db
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            minimum: 1
+          required: true
+          description: id number of call which you want get
+      responses:
+        '200':
+          description: succes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallDao'
+        '500':
+          description: id not found
+  /Calls/byNumber:
+    get:
+      summary: get calls by number
+      parameters:
+        - in: query
+          name: ident
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: number
+          schema:
+            type: integer
+            format: int64
+            minimum: 10000000000
+            maximum: 99999999999999
+            example: 89165548548
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CallDao'
+        '400':
+          description: not found
+
+components:
+  schemas:
+    CallDao:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 10
+        callerPhoneNumber:
+          description: who is calling
+          type: integer
+          format: int64
+          minimum: 10000000000
+          maximum: 99999999999999
+          example: 89165548548
+        calledPhoneNumber:
+          description: who is being called
+          type: integer
+          format: int64
+          minimum: 10000000000
+          maximum: 99999999999999
+          example: 89165548548
+        callDuration:
+          description: call duration in sec
+          type: integer
+          format: int64
+          example: 60
+        callDate:
+          description: call duration
+          type: string
+          format: date-time
+        is_spam:
+          type:
+            boolean
+        is_roaming:
+          type:
+            boolean
+        roaming_country:
+          type: string
+        is_fraud:
+          type:
+            boolean
